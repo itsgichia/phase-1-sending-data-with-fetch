@@ -1,34 +1,30 @@
-function submitData(){
-    const username = 'Gichia';
-    const userEmail = 'gichiamuiruri@icloud.com'
-    
-    console.log(username);
-    console.log(userEmail);
-
-
-
+function submitData(name, email){
+    const data = {
+        name: name,
+        email: email,
+    }
 const configurationObject = {
     method: "POST",
     headers: {
         "Content-Type": 'application/json',
         "Accept": 'application/json'
     },
-    body: JSON.stringify({
-        username: "user",
-        userEmail:"gichiamuiruri@icloud.com",
-    })
+    body: JSON.stringify(data)
 };
 
-fetch("http://localhost:3000/users",configurationObject)
+return fetch("http://localhost:3000/users",configurationObject)
     .then(function (response){
         return response.json();
 })
-    .then(function(object){
-        console.log(object);
+    .then(function(data){
+        console.log(data);
+        //append the new id to the DOM (test 2)
+        const newId = data.id;
+        // Example: document.body.innerHTML += `<p>New ID: ${newId}</p>`;
 })
     .catch(function(error){
         console.log(error.message);
+        document.body.innerHTML += `<p>${error.message}</p>`;
 });
-return fetch("http://localhost:3000/users", configurationObject);
 }
-submitData();
+submitData('steve', 'steve@steve.com');
